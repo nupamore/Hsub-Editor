@@ -1,0 +1,56 @@
+#editor-container {
+  margin-bottom: 0;
+}
+#editor-menu {
+  display: none;
+}
+#video-container {
+  text-align: center;
+}
+
+#cue-list {
+  padding: 5px;
+  height: 88vh;
+  margin-bottom: 0;
+  overflow-x: scroll;
+}
+#cue-list .collapsible-header {
+  position: relative;
+}
+#cue-list .collapsible-body {
+  margin: 0px 15px;
+}
+#cue-list .materialize-textarea {
+  padding-top: 10px;
+}
+
+#cue-list input[type=number] {
+  text-align: center;
+}
+
+#cue-list .delete-cue {
+  position: absolute;
+  right: -10px;
+}
+
+.switch {
+  padding: 10px 0;
+}
+#auto-timemove {
+  float: right;
+}
+
+
+@media only screen and (min-width: 992px) {
+  .container {
+    width: 85%;
+  }
+  .mejs-captions-text {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 1800px) {
+  .mejs-captions-text {
+    font-size: 25px;
+  }
+}
