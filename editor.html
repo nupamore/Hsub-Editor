@@ -3,26 +3,50 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="자막편집 웹어플리케이션입니다">
-	<link rel="icon" href="favicon.jpg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="icon" href="favicon.png">
 
-	<title>핫산 에디터</title>
+	<title>핫산 - 자막 에디터</title>
 
-	<link rel="stylesheet" href="css/materialize.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/nouislider.min.css" />
-	<link rel="stylesheet" href="css/mediaelementplayer.css" />
-	<link rel="stylesheet" href="editor.css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/common.css" />
 
 	<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 	<script src="js/materialize.min.js"></script>
+
+	<meta name="description" content="자막편집 웹어플리케이션입니다">
+
+	<link href='http://fonts.googleapis.com/earlyaccess/notosansjp.css' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/earlyaccess/jejugothic.css' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/nouislider.min.css" />
+	<link rel="stylesheet" href="css/mediaelementplayer.css" />
+	<link rel="stylesheet" href="css/mejs-theme.css" />
+	<link rel="stylesheet" href="css/editor.css" />
+
 	<script src="js/nouislider.min.js"></script>
 	<script src="js/mediaelement-and-player.min.js"></script>
+	<script src="https://npmcdn.com/draggabilly@2.1/dist/draggabilly.pkgd.min.js"></script>
+	<script src="js/sami.min.js"></script>
 
 </head>
 <body>
+	<header class="container">
+		<nav class="nav-wrapper white">
+	    <a href="/" class="brand-logo teal-text">Hassan.kr</a>
+	    <a href="#" data-activates="menu" class="button-collapse teal-text"><i class="material-icons">menu</i></a>
+	    <ul class="right hide-on-med-and-down">
+	      <li><a href="editor">에디터</a></li>
+	      <li><a href="contact">방명록</a></li>
+	    </ul>
+	    <ul class="side-nav" id="menu">
+	      <li><a href="editor">에디터</a></li>
+	      <li><a href="contact">방명록</a></li>
+	    </ul>
+	  </nav>
+	</header>
 
 	<section class="container">
 		<br>
@@ -32,71 +56,67 @@
 
 				<div class="row input-field">
 					<div class="col s8">
-						<input id="video-src" type="text" value="https://www.youtube.com/watch?v=0eY_ScNmsgs">
+						<input id="youtube-src" type="text">
 					</div>
 					<div class="col s2">
-						<div class="btn" onClick="initMovie($('#video-src').val(), 'youtube')">
+						<div id="inputYoutubeSrc" class="btn" onClick="initMovie($('#youtube-src').val(), 'youtube')">
 			        <span>youtube</span>
 			      </div>
 					</div>
 					<div class="col s2">
 						<div class="btn file-field">
 			        <span>mp4</span>
-			        <!-- <input id="inputVideoFile" type="file" onChange="loadMP4(this.files)"> -->
 							<input id="inputVideoFile" onChange="loadMP4(this)" type="file" accept=".mp4">
 			      </div>
 					</div>
 				</div>
 
-				<div id="video-container">
+				<div id="player-container">
 					<!-- player here -->
-					<img id="logo-image" src="favicon.jpg" alt="">
 				</div>
 
-				<div class="row">
+				<div class="row margin-bottom-0">
 					<div id="editor-menu" class="input-field">
-			      <div class="btn file-field">
-			        <span>load</span>
-			        <input type="file" onChange="loadCaption(this)" accept=".srt">
-			      </div>
-						<div class="btn" onClick="saveCaption()">
-			        <span>save</span>
-			      </div>
 						<!-- Modal Trigger -->
-					  <a class="waves-effect waves-light btn modal-trigger" href="#shortcut">사용법</a>
+					  <a id="publish-open" class="waves-effect waves-light btn modal-trigger right" href="#publish">공유하기</a>
 					  <!-- Modal Structure -->
-					  <div id="shortcut" class="modal">
-					    <div class="modal-content">
-								<b>enter</b>
-								<br>선택된 자막을 적용한다. 종료시간이 없을 경우 현재시간을 종료시간으로 설정<br>
-								<b>shift + enter</b>
-								<br>줄바꿈<br>
-								<br>
-								<b>tab</b>
-								<br>다음 자막으로 이동. 다음 자막이 없을 경우 현재 시간을 시작시간으로 새 자막 생성<br>
-								<b>shift + tab</b>
-								<br>이전 자막으로 이동<br>
-								<br>
-								<b>alt + insert</b>
-								<br>현재 시간을 시작시간으로 새 자막 생성<br>
-								<b>alt + end</b>
-								<br>선택된 자막의 종료시간을 시작시간으로 새 자막 생성<br>
-								<b>alt + pageup</b>
-								<br>선택된 자막의 시작시간을 현재시간으로 설정<br>
-								<b>alt + pagedown</b>
-								<br>선택된 자막의 종료시간을 현재시간으로 설정<br>
-								<br>
-								<b>ctrl + space</b>
-								<br>일시정지<br>
-								<b>ctrl + ←</b>
-								<br>1초 뒤로<br>
-								<b>ctrl + →</b>
-								<br>1초 앞으로<br>
+					  <div id="publish" class="modal">
+					    <div class="modal-content container">
+
+								<form>
+									<div class="row">
+						        <div class="input-field col s12">
+						          <input id="cap-title" type="text" class="validate" length="50">
+						          <label for="cap-title">제목</label>
+						        </div>
+										<div class="input-field col s12">
+						          <input id="cap-translator" type="text" class="validate" placeholder="번역자의 이름이나 출처를 적어주세요" length="50">
+						          <label for="cap-translator">역자</label>
+						        </div>
+										<div class="input-field col s6">
+						          <input id="cap-user" type="text" class="validate" placeholder="닉네임을 적어주세요" length="20">
+						          <label for="cap-user">업로더</label>
+						        </div>
+										<div class="input-field col s6">
+						          <input id="cap-password" type="password" class="validate" maxlength="20">
+						          <label for="cap-password">비밀번호</label>
+						        </div>
+										<div class="hidden">
+						          <input id="cap-thumbSrc" type="hidden" class="validate" maxlength="20">
+						          <label for="cap-thumbSrc">썸네일</label>
+						        </div>
+						      </div>
+									<div class="row">
+										<div class="btn right" onClick="upload()">
+							        <span>업로드</span>
+							      </div>
+										<span>* 서버에 업로드 되어<br>다른 사이트로 공유할 수 있습니다.</span>
+						      </div>
+						    </form>
+
 					    </div>
 					  </div>
-						<div class="btn" onClick="cueClear()" style="float:right">
-			        <span>clear</span>
-			      </div>
+
 			    </div>
 					<div>
 						<p>
@@ -104,12 +124,12 @@
 							유튜브 URL을 붙여넣기하고 YOUTUBE버튼을 클릭하거나 <br>
 							MP4버튼을 클릭해서 파일을 선택해주세요. <br>
 							<br>
-							자막은 srt파일로 저장되며 추후 smi도 지원할 예정입니다.<br>
-							<a href="http://smisrt.com/" target="_blank">http://smisrt.com/</a> <- smi, srt 변환기
+							자막은 srt파일로 저장됩니다.<br>
+							<a href="http://smisrt.com/" target="_blank">http://smisrt.com/</a> <- smi, srt 변환기<br>
 							<br>
-							<br>
-							<br>
-							Contact: <a href="https://twitter.com/nupamoreP" target="_blank">@nupamoreP</a>
+							<b>굵게</b> : &lt;b&gt;굵게&lt;/b&gt;<br>
+							<font color=red>색상</font> : &lt;font color=red&gt;빨간색&lt;/font&gt;
+
 						</p>
 					</div>
 				</div>
@@ -131,9 +151,61 @@
 			      ON
 			    </label>
 			  </div>
-				<ul id="cue-list" class="collapsible popout" data-collapsible="accordion">
+				<div id="right-button-container">
+					<a onClick="createCue()" class="btn-floating btn-large waves-effect waves-light tooltipped" data-position="right" data-tooltip="자막 추가">
+						<i class="fa fa-plus" aria-hidden="true"></i>
+					</a>
+					<a onClick="cueClear()" class="btn-floating btn-large waves-effect waves-light tooltipped" data-position="right" data-tooltip="전체 삭제">
+						<i class="fa fa-trash-o" aria-hidden="true"></i>
+					</a>
+					<a onClick="changeSync()" class="btn-floating btn-large waves-effect waves-light tooltipped" data-position="right" data-tooltip="싱크 조절">
+						<i class="fa fa-arrows-h" aria-hidden="true"></i>
+					</a>
+					<div class="btn file-field btn-floating btn-large waves-effect waves-light tooltipped" data-position="right" data-tooltip="자막 불러오기">
+						<i class="fa fa-folder-open-o" aria-hidden="true"></i>
+						<input onChange="loadCaption(this)" type="file" accept=".srt,.smi">
+					</div>
+					<a onClick="saveCaption()" class="btn-floating btn-large waves-effect waves-light tooltipped" data-position="right" data-tooltip="자막 다운로드">
+						<i class="fa fa-floppy-o" aria-hidden="true"></i>
+					</a>
+					<a onClick="$('#shortcut').toggle(300)" class="btn-floating btn-large waves-effect waves-light tooltipped" data-position="right" data-tooltip="단축키">
+						<i class="fa fa-keyboard-o" aria-hidden="true"></i>
+					</a>
+				</div>
+				<ul id="cue-list" class="collapsible popout margin-bottom-0" data-collapsible="accordion">
 					<!-- cue divs -->
 			  </ul>
+			</div>
+
+
+			<div id="shortcut" class="draggable z-depth-2">
+				<i class="fa fa-times fa-2x right close-button" aria-hidden="true" onClick="$('#shortcut').hide(300)"></i>
+				<br>
+				<b>enter</b>
+				<br>선택된 자막을 적용한다. 종료시간이 없을 경우 현재시간을 종료시간으로 설정<br>
+				<b>shift + enter</b>
+				<br>줄바꿈<br>
+				<br>
+				<b>tab</b>
+				<br>다음 자막으로 이동. 다음 자막이 없을 경우 현재 시간을 시작시간으로 새 자막 생성<br>
+				<b>shift + tab</b>
+				<br>이전 자막으로 이동<br>
+				<br>
+				<b>alt + insert</b>
+				<br>현재 시간을 시작시간으로 새 자막 생성<br>
+				<b>alt + end</b>
+				<br>선택된 자막의 종료시간을 시작시간으로 새 자막 생성<br>
+				<b>alt + pageup</b>
+				<br>선택된 자막의 시작시간을 현재시간으로 설정<br>
+				<b>alt + pagedown</b>
+				<br>선택된 자막의 종료시간을 현재시간으로 설정<br>
+				<br>
+				<b>ctrl + space</b>
+				<br>일시정지<br>
+				<b>ctrl + ←</b>
+				<br>1초 뒤로<br>
+				<b>ctrl + →</b>
+				<br>1초 앞으로<br>
 			</div>
 
 
@@ -141,5 +213,8 @@
 	</section>
 
 </body>
-<script src="editor.js"></script>
+<script src="js/editor.js"></script>
+<script>
+	$(".button-collapse").sideNav();
+</script>
 </html>

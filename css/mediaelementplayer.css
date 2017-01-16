@@ -997,24 +997,3 @@ div.mejs-speed-button {
 }
 
 /* End: Skip Back */
-
-
-
-
-/* overriding */
-
-.mejs-captions-text {
-	background-color: inherit;
-	padding: 0;
-	font-weight: bold;
-	font-size: 2.5vw;
-	line-height: 1.2;
-	text-shadow:
-   -1.5px -1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-    -1.5px 1.5px 0 #000,
-     1.5px 1.5px 0 #000;
-}
-.mejs-captions-position {
-	bottom: 30px;
-}

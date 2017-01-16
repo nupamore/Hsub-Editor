@@ -1,0 +1,50 @@
+
+
+.mejs-captions-text {
+	/* background-color: inherit; */
+	background-color: rgba(0,0,0, 0.5);
+	padding: 0 5px;
+	font-family: 'Noto Sans JP', 'Jeju Gothic', sans-serif;
+	font-weight: 500;
+	font-size: 5vmin;
+	letter-spacing: -0.01em;
+	line-height: 1.5;
+
+	text-shadow:
+	 	-0.15vmin -0.15vmin 0 #000,
+		0.35vmin -0.15vmin 0 #000,
+		-0.15vmin 0.35vmin 0 #000,
+		0.35vmin 0.35vmin 0 #000;
+}
+.mejs-captions-position {
+	width: 90%;
+	margin: 0 5%;
+	bottom: 6vh;
+}
+
+@media only screen and (max-width: 992px) {
+  .mejs-captions-position {
+    bottom: 40px;
+  }
+}
+
+.mejs-container .mejs-controls {
+    margin: 1%;
+    width: 98%;
+    border-radius: 5px;
+		background: linear-gradient(rgba(50,50,50,0.5), rgba(0,0,0,0.5));
+}
+.mejs-controls .mejs-time-rail .mejs-time-loaded {
+    background: #3caac8;
+		background: rgba(255,255,255,0.8);
+    width: 0;
+}
+.mejs-controls .mejs-time-rail .mejs-time-current {
+    background: #fff;
+    background: rgba(38,166,154,0.8);
+    width: 0;
+}
+
+.mejs-controls .mejs-captions-button:hover .mejs-captions-selector {
+	display: none;
+}
