@@ -1,0 +1,40 @@
+{
+  "name": "hsub-editor",
+  "version": "1.0.0",
+  "description": "Web video subtitle maker with youtube and mp4",
+  "main": "server.js",
+  "author": {
+    "name": "nupamore",
+    "email": "nupamore@gmail.com",
+    "url": "http://nupamore.github.io/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nupamore/hsub-editor"
+  },
+  "scripts": {
+    "postinstall": "gulp clean && gulp build",
+    "start": "gulp start"
+  },
+  "dependencies": {
+    "express": "^4.14.1",
+    "videojs-ass": "^0.6.3",
+    "vue": "^2.1.10"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "del": "^2.2.2",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-compat": "^0.1.3",
+    "eslint-plugin-import": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-changed": "^1.3.2",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.0",
+    "webpack": "^2.2.1",
+    "webpack-stream": "^3.2.0"
+  }
+}

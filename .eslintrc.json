@@ -1,0 +1,25 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jquery": true
+  },
+  "plugins": [
+    "import", "compat"
+  ],
+  "settings": {
+    "targets": ["chrome", "firefox"],
+    "compiler": "babel"
+  },
+  "rules": {
+    "semi": [2, "never"],
+    "linebreak-style": 0,
+    "no-console": 0,
+    "global-require": 1,
+    "import/no-dynamic-require": 1,
+    "no-use-before-define": 1,
+    "no-undef": 1
+  }
+}
