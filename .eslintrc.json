@@ -3,11 +3,11 @@
   "env": {
     "es6": true,
     "node": true,
-    "browser": true,
-    "jquery": true
+    "browser": true
   },
   "plugins": [
-    "import", "compat"
+    "import",
+    "html"
   ],
   "settings": {
     "targets": ["chrome", "firefox"],
@@ -17,9 +17,8 @@
     "semi": [2, "never"],
     "linebreak-style": 0,
     "no-console": 0,
-    "global-require": 1,
-    "import/no-dynamic-require": 1,
+    "global-require": 0,
     "no-use-before-define": 1,
-    "no-undef": 1
+    "no-unused-vars": 1
   }
 }

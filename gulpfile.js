@@ -12,15 +12,16 @@ const del = require('del')
 const src = {
   index: 'server.js',
   js: 'src/**/*.js',
+  vue: 'src/**/*.vue',
   sass: 'src/theme/**/*.scss',
-  static: 'src/theme/*.html',
+  static: 'src/theme/*.*',
   build: 'dist',
 }
 
 
 // webpack
 gulp.task('webpack', () => gulp
-  .src(src.js)
+  .src([src.js, src.vue])
   .pipe(changed(src.build))
   .pipe(webpack(webpackConfig))
   .on('error', function error(e) {
@@ -47,7 +48,7 @@ gulp.task('static', () => gulp
 
 // watch
 gulp.task('watch', () => {
-  gulp.watch(src.js, ['webpack'])
+  gulp.watch([src.js, src.vue], ['webpack'])
   gulp.watch(src.sass, ['sass'])
   gulp.watch(src.static, ['static'])
 })
