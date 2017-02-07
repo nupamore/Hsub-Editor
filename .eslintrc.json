@@ -15,10 +15,9 @@
   },
   "rules": {
     "semi": [2, "never"],
-    "linebreak-style": 0,
     "no-console": 0,
     "global-require": 0,
-    "no-use-before-define": 1,
+    "no-use-before-define": ["error", { "functions": false }],
     "no-unused-vars": 1
   }
 }

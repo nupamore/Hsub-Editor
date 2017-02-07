@@ -24,7 +24,9 @@ app.set('views', path.resolve(__dirname, 'dist'))
 // theme
 app.get('/:theme', (req, res) => {
   const theme = req.params.theme
-  res.render('theme', { theme })
+
+  if (theme === 'favicon.ico') res.sendStatus(404)
+  else res.render('theme', { theme })
 })
 
 app.listen(app.get('port'))

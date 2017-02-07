@@ -1,9 +1,13 @@
 
 .container {
   margin: 0 auto;
-  max-width: 700px;
+  max-width: 900px;
 }
 
-.player-wrapper {
+.hs-player-wrapper {
   width: 100%;
+}
+
+.hs-cue-list {
+  margin-top: 20px;
 }

@@ -1,31 +1,38 @@
 
 <template>
 
-  <div class="player-wrapper">
-    <video id="player" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+  <div class="hs-player-wrapper">
+    <video id="hs-player" class="video-js vjs-default-skin vjs-big-play-centered"></video>
   </div>
 
 </template>
-
-
-
 <script>
+
+/**
+ * videojs player
+ */
+
+import ass from '../lib/videojs-ass'
 
 const videojs = window.videojs
 
 export default {
-  // constructor
   mounted() {
     const videoType = 'youtube'
     const videoSrc = 'https://www.youtube.com/watch?v=HswIHVN5D4o'
     const trackSrc = 'subs/sample.ass'
 
     this.player = initVideojs({ videoType, videoSrc, trackSrc })
+    ass.then((r) => {
+      this.renderer = r
+      window.r = r
+    })
   },
-  // data
+
   data() {
     return {
       player: {},
+      renderer: {},
     }
   },
 }
@@ -39,11 +46,9 @@ export default {
  * @return {Void}
  */
 function initVideojs({ videoType, videoSrc, trackSrc }) {
-  return videojs('player', {
+  return videojs('hs-player', {
     controls: true,
     nativeControlsForTouch: false,
-    width: 640,
-    height: 360,
     fluid: true,
     plugins: {
       ass: {
