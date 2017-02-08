@@ -2,7 +2,7 @@
 <template>
 
   <div class="hs-cue">
-    {{ text }}
+    <input type="text" v-model="text._value">
   </div>
 
 </template>

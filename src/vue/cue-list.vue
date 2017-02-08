@@ -2,7 +2,7 @@
 <template>
 
   <div class="hs-cue-list">
-    <cue v-for="cue of cues" :text="cue.text"></cue>
+    <cue v-for="cue of cues" :text="cue.parts[cue.parts.length-1]"></cue>
   </div>
 
 </template>
@@ -16,13 +16,11 @@ import cue from './cue.vue'
 
 
 export default {
+  props: ['cues'],
+
   data() {
     return {
-      cues: [{
-        text: 'test',
-      }, {
-        text: 'test',
-      }],
+      cues: this.cues,
     }
   },
 

@@ -12,21 +12,20 @@
  * videojs player
  */
 
-import ass from '../lib/videojs-ass'
+import assRender from '../lib/videojs-ass'
+
 
 const videojs = window.videojs
 
 export default {
+  assRender,
+
   mounted() {
     const videoType = 'youtube'
     const videoSrc = 'https://www.youtube.com/watch?v=HswIHVN5D4o'
     const trackSrc = 'subs/sample.ass'
 
     this.player = initVideojs({ videoType, videoSrc, trackSrc })
-    ass.then((r) => {
-      this.renderer = r
-      window.r = r
-    })
   },
 
   data() {

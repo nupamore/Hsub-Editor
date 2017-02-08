@@ -19,4 +19,10 @@ const app = new Vue({
     title: 'Hsub Editor',
     cues: [],
   },
+
+  mounted() {
+    player.assRender.then((r) => {
+      this.cues = r.ass.dialogues
+    })
+  },
 })
