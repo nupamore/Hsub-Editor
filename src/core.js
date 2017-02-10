@@ -21,8 +21,13 @@ const app = new Vue({
   },
 
   mounted() {
+    // get libjass cues
     player.assRender.then((r) => {
-      this.cues = r.ass.dialogues
+      this.cues = r.ass.dialogues.map(dialogue => dialogue.parts
+        .filter(part => part.constructor.name === 'Text')
+        .reduce((p, n) => p + n.value, ''))
+
+      window.r = r.ass
     })
   },
 })

@@ -2,7 +2,7 @@
 <template>
 
   <div class="hs-cue-list">
-    <cue v-for="cue of cues" :text="cue.parts[cue.parts.length-1]"></cue>
+    <cue v-for="cue of cues" :text="cue"></cue>
   </div>
 
 </template>

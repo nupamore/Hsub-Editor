@@ -2,7 +2,7 @@
 <template>
 
   <div class="hs-cue">
-    <input type="text" v-model="text._value">
+    <input type="text" v-model="text">
   </div>
 
 </template>
