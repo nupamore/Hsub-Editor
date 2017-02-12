@@ -17,6 +17,8 @@
     "semi": [2, "never"],
     "no-console": 0,
     "global-require": 0,
+    "no-underscore-dangle": 0,
+    "no-param-reassign": ["error", { "props": false }],
     "no-use-before-define": ["error", { "functions": false }],
     "no-unused-vars": 1
   }

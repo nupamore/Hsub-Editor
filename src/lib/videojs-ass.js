@@ -60,7 +60,7 @@ export default new Promise((resolve, reject) => {
     player.on('ratechange', updateClockRate);
 
     function updateDisplayArea() {
-      setTimeout(function () {
+      //setTimeout(function () {
         // player might not have information on video dimensions when using external providers
         var videoWidth = options.videoWidth || player.videoWidth() || player.el().offsetWidth,
           videoHeight = options.videoHeight || player.videoHeight() || player.el().offsetHeight,
@@ -74,7 +74,7 @@ export default new Promise((resolve, reject) => {
           subsWrapperTop = (videoOffsetHeight - subsWrapperHeight) / 2;
 
         renderer.resize(subsWrapperWidth, subsWrapperHeight, subsWrapperLeft, subsWrapperTop);
-      }, 100);
+      //}, 100);
     }
 
     window.addEventListener('resize', updateDisplayArea);
@@ -101,6 +101,8 @@ export default new Promise((resolve, reject) => {
         }
 
         renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
+        // re-render forced
+        renderer._resize = updateDisplayArea
         resolve(renderer)
       }
     );

@@ -22,8 +22,8 @@ export default {
 
   mounted() {
     const videoType = 'youtube'
-    const videoSrc = 'https://www.youtube.com/watch?v=HswIHVN5D4o'
-    const trackSrc = 'subs/sample.ass'
+    const videoSrc = 'https://www.youtube.com/watch?v=6BXKh4f6Vhw'
+    const trackSrc = 'subs/sample2.ass'
 
     this.player = initVideojs({ videoType, videoSrc, trackSrc })
   },
@@ -31,7 +31,6 @@ export default {
   data() {
     return {
       player: {},
-      renderer: {},
     }
   },
 }

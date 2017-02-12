@@ -1,33 +1,69 @@
 
 import util from './lib/util'
+
 import player from './vue/player.vue'
-import cueList from './vue/cue-list.vue'
 
 // import from other files
-const { Vue } = window
+const { Vue, libjass } = window
 
 
-const app = new Vue({
-  el: '#app',
+const hs = new Vue({
+  el: '#hs-app',
 
   components: {
     'hs-player': player,
-    'hs-cue-list': cueList,
   },
 
   data: {
     title: 'Hsub Editor',
+    renderer: {},
     cues: [],
+  },
+
+  methods: {
+    keyupText(cue) {
+      cue._parts = libjass.parser.parse(cue._rawPartsString, 'dialogueParts')
+    },
+
+    changeText(oldCue) {
+      const newCue = new libjass.Dialogue(new Map([
+        ['Style', oldCue.style],
+        ['Start', '0:00:0.00'],
+        ['End', '0:01:10.00'],
+        ['Text', oldCue._rawPartsString],
+      ]), this.renderer.ass)
+
+      const index = this.cues.findIndex(cue => cue.id === oldCue.id)
+      newCue._id = oldCue.id
+      this.cues[index] = newCue
+      // re-render forced
+      this.renderer._resize()
+    },
+
+    addCue() {
+      const cue = new libjass.Dialogue(new Map([
+        ['Style', 'Default'],
+        ['Start', '0:00:0.00'],
+        ['End', '0:01:10.00'],
+        ['Text', 'new text'],
+      ]), this.renderer.ass)
+      cue._containsTransformTag = true
+
+      this.cues.push(cue)
+    },
   },
 
   mounted() {
     // get libjass cues
     player.assRender.then((r) => {
-      this.cues = r.ass.dialogues.map(dialogue => dialogue.parts
-        .filter(part => part.constructor.name === 'Text')
-        .reduce((p, n) => p + n.value, ''))
-
-      window.r = r.ass
+      this.renderer = r
+      this.cues = r.ass.dialogues
+      // re-render forced
+      this.cues.forEach((cue) => { cue._containsTransformTag = true })
+      // debug
+      window.r = r
     })
   },
 })
+
+window.hs = hs
