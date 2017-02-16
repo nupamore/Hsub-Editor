@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hsub-editor</title>
+
+  <!-- lib -->
+  <script src="lib/vue.min.js"></script>
+
+  <link href="lib/video-js.min.css" rel="stylesheet">
+  <script src="lib/video.min.js"></script>
+
+  <script src="lib/Youtube.min.js"></script>
+
+  <link href="lib/libjass.css" rel="stylesheet">
+  <script src="lib/libjass.js"></script>
+
+  <link href="lib/videojs.ass.css" rel="stylesheet">
+  <!--script src="/lib/videojs.ass.js"></script-->
+
+  <!-- theme -->
+  <link rel="stylesheet" href="css/flat.css">
+</head>
+<body>
+
+
+  <div id="hs-app">
+    <div class="container">
+
+      <h1>Hsub-editor</h1>
+      <hs-player></hs-player>
+
+      <div class="hs-cue-list">
+        <div class="hs-cue" v-for="cue of cues">
+          <input type="number" v-model.number="cue._start" min="0">
+          <input type="number" v-model.number="cue._end" min="0">
+          <textarea v-model="cue._rawPartsString" @keyup="keyupText(cue)" @change="changeText(cue)"></textarea>
+        </div>
+      </div>
+
+      <hr>
+
+      <button @click="addCue()">add</button>
+
+    </div>
+  </div>
+
+
+</body>
+<script src="js/editor.js"></script>
+</html>
