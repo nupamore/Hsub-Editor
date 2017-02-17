@@ -1,12 +1,19 @@
 
-import util from './lib/util'
+// import util functions
+import { debounce } from 'lodash'
+import { seconds2format } from './lib/util'
 
+// import vue components
 import player from './vue/player.vue'
 
 // import from other files
 const { Vue, libjass } = window
 
 
+/**
+ * core vue instance
+ * @type {Vue}
+ */
 const hs = new Vue({
   el: '#hs-app',
 
@@ -17,49 +24,55 @@ const hs = new Vue({
   data: {
     title: 'Hsub Editor',
     renderer: {},
-    cues: [],
+    dialogues: [],
   },
 
   methods: {
-    keyupText(cue) {
-      cue._parts = libjass.parser.parse(cue._rawPartsString, 'dialogueParts')
-    },
+    /**
+     * [keyupText description]
+     * @type {[type]}
+     */
+    keyupText: debounce((oldDialogue) => {
+      const newDialogue = new libjass.Dialogue(new Map([
+        ['Style', oldDialogue.style],
+        ['Start', seconds2format(oldDialogue._start)],
+        ['End', seconds2format(oldDialogue._end)],
+        ['Text', oldDialogue._rawPartsString],
+      ]), hs.renderer.ass)
 
-    changeText(oldCue) {
-      const newCue = new libjass.Dialogue(new Map([
-        ['Style', oldCue.style],
-        ['Start', '0:00:0.00'],
-        ['End', '0:01:10.00'],
-        ['Text', oldCue._rawPartsString],
-      ]), this.renderer.ass)
+      newDialogue._containsTransformTag = true
+      newDialogue._id = oldDialogue.id
 
-      const index = this.cues.findIndex(cue => cue.id === oldCue.id)
-      newCue._id = oldCue.id
-      this.cues[index] = newCue
+      const index = hs.dialogues.findIndex(dialogue => dialogue.id === oldDialogue.id)
+      hs.dialogues[index] = newDialogue
       // re-render forced
-      this.renderer._resize()
+      hs.renderer._resize()
+    }, 200),
+
+    changeText(oldDialogue) {
+      this.keyupText(oldDialogue)
     },
 
-    addCue() {
-      const cue = new libjass.Dialogue(new Map([
+    addDialogue() {
+      const dialogue = new libjass.Dialogue(new Map([
         ['Style', 'Default'],
         ['Start', '0:00:0.00'],
         ['End', '0:01:10.00'],
         ['Text', 'new text'],
       ]), this.renderer.ass)
-      cue._containsTransformTag = true
 
-      this.cues.push(cue)
+      dialogue._containsTransformTag = true
+      this.dialogues.push(dialogue)
     },
   },
 
   mounted() {
-    // get libjass cues
+    // get libjass dialogues
     player.assRender.then((r) => {
       this.renderer = r
-      this.cues = r.ass.dialogues
+      this.dialogues = r.ass.dialogues
       // re-render forced
-      this.cues.forEach((cue) => { cue._containsTransformTag = true })
+      this.dialogues.forEach((dialogue) => { dialogue._containsTransformTag = true })
       // debug
       window.r = r
     })

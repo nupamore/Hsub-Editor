@@ -1,5 +1,6 @@
 
 const webpack = require('webpack')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const path = require('path')
 
 module.exports = {
@@ -19,6 +20,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           cacheDirectory: true,
+          plugins: ['lodash'],
         },
       },
       {
@@ -27,11 +29,14 @@ module.exports = {
       },
     ],
   },
-  plugins: [new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false,
-    },
-    minimize: true,
-    sourceMap: true,
-  })],
+  plugins: [
+    new LodashModuleReplacementPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+      minimize: true,
+      sourceMap: true,
+    }),
+  ],
 }

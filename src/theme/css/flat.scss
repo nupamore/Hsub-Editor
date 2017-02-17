@@ -1,4 +1,8 @@
 
+body {
+  height: 100%;
+}
+
 .container {
   margin: 0 auto;
   max-width: 900px;
@@ -8,6 +12,19 @@
   width: 100%;
 }
 
-.hs-cue-list {
+.hs-dialogue-list {
+  height: 400px;
   margin-top: 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.hs-dialogue {
+  input {
+    width: 50px;
+    vertical-align: top;
+  }
+  textarea {
+    width: 100%;
+  }
 }
