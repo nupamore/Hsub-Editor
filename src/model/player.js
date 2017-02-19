@@ -1,21 +1,9 @@
 
-<template>
-
-  <div class="hs-player-wrapper">
-    <video id="hs-player" class="video-js vjs-default-skin vjs-big-play-centered"></video>
-  </div>
-
-</template>
-<script>
-
-/**
- * videojs player
- */
-
 import assRender from '../lib/videojs-ass'
 
+// Import from other files
+const { videojs } = window
 
-const videojs = window.videojs
 
 export default {
   assRender,
@@ -37,14 +25,14 @@ export default {
 
 
 /**
- * render videojs
+ * Render videojs
  * @param  {String} videoType
  * @param  {String} videoSrc
  * @param  {String} trackSrc
  * @return {Void}
  */
 function initVideojs({ videoType, videoSrc, trackSrc }) {
-  return videojs('hs-player', {
+  return videojs('player', {
     controls: true,
     nativeControlsForTouch: false,
     fluid: true,
@@ -61,5 +49,3 @@ function initVideojs({ videoType, videoSrc, trackSrc }) {
     }],
   })
 }
-
-</script>

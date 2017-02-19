@@ -27,10 +27,15 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue',
       },
+      {
+        test: /\.less$/,
+        loader: 'style!css!less',
+      },
     ],
   },
   plugins: [
     new LodashModuleReplacementPlugin(),
+    /*
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -38,5 +43,6 @@ module.exports = {
       minimize: true,
       sourceMap: true,
     }),
+    */
   ],
 }
