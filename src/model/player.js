@@ -8,18 +8,18 @@ const { videojs } = window
 export default {
   assRender,
 
+  data() {
+    return {
+      player: {},
+    }
+  },
+
   mounted() {
     const videoType = 'youtube'
     const videoSrc = 'https://www.youtube.com/watch?v=6BXKh4f6Vhw'
     const trackSrc = 'subs/sample2.ass'
 
     this.player = initVideojs({ videoType, videoSrc, trackSrc })
-  },
-
-  data() {
-    return {
-      player: {},
-    }
   },
 }
 

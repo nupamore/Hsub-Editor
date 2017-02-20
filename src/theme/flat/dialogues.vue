@@ -3,9 +3,9 @@
 
   <div class="dialogue-list">
     <div class="dialogue" v-for="dialogue of dialogues">
-      <input type="number" v-model.number="dialogue._start" min="0">
-      <input type="number" v-model.number="dialogue._end" min="0">
-      <textarea v-model="dialogue._rawPartsString" @keyup="parseDialogue(dialogue)" @change="parseDialogue(dialogue)"></textarea>
+      <input type="number" v-model.number="dialogue.start" min="0">
+      <input type="number" v-model.number="dialogue.end" min="0">
+      <textarea v-model="dialogue.text"></textarea>
     </div>
   </div>
 

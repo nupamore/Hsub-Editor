@@ -1,16 +1,18 @@
 
-// Import from other files
-const { libjass } = window
+// Import class
+import Dialogue from '../class/Dialogue'
 
 
 export default {
   el: '#app',
 
-  data: {
-    title: 'Hsub Editor',
-    renderer: {},
-    styles: [],
-    dialogues: [],
+  data() {
+    return {
+      title: 'Hsub Editor',
+      renderer: {},
+      styles: [],
+      dialogues: [],
+    }
   },
 
   mounted() {
@@ -19,8 +21,7 @@ export default {
       this.renderer = renderer
       this.styles = renderer.ass.styles
       this.dialogues = renderer.ass.dialogues
-      // Re-render forced
-      this.dialogues.forEach((dialogue) => { dialogue._containsTransformTag = true })
+        .map(dialogue => new Dialogue(dialogue, renderer))
     })
   },
 }

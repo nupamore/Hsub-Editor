@@ -14,8 +14,7 @@
       </toolbar>
       <hr>
       <dialogues
-        :dialogues="dialogues"
-        :renderer="renderer">
+        :dialogues="dialogues">
       </dialogues>
     </section>
   </div>
