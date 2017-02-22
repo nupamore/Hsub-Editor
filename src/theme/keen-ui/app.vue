@@ -8,11 +8,6 @@
     </header>
 
     <section>
-      <toolbar
-        :dialogues="dialogues"
-        :renderer="renderer">
-      </toolbar>
-      <hr>
       <dialogues
         :dialogues="dialogues">
       </dialogues>
@@ -24,6 +19,8 @@
 
 
 <style lang="less">
+  @import '../../../node_modules/keen-ui/dist/keen-ui.min.css';
+
   body {
     height: 100%;
   }

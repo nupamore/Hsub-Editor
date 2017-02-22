@@ -9,7 +9,7 @@ const fs = require('fs')
 const entry = fs.readdirSync('src/theme')
   .filter(theme => !theme.match(/\./))
   .reduce((obj, theme) => {
-    obj[theme] = `./theme/${theme}`
+    obj[theme] = `./theme/${theme}/${theme}.js`
     return obj
   }, {})
 
