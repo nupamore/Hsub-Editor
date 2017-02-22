@@ -2,15 +2,24 @@
 const webpack = require('webpack')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const path = require('path')
+const fs = require('fs')
+
+
+// Generate entry from theme folders
+const entry = fs.readdirSync('src/theme')
+  .filter(theme => !theme.match(/\./))
+  .reduce((obj, theme) => {
+    obj[theme] = `./theme/${theme}`
+    return obj
+  }, {})
+
 
 module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, 'src'),
-  entry: {
-    core: './core',
-  },
+  entry,
   output: {
-    filename: path.resolve(__dirname, 'js/editor.js'),
+    filename: path.resolve(__dirname, 'js/[name].js'),
   },
   module: {
     loaders: [
@@ -18,7 +27,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
+        rules: {
           cacheDirectory: true,
           plugins: ['lodash'],
         },
